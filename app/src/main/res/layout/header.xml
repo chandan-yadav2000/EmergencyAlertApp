@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="250dp"
+    android:background="@color/red"
+    android:gravity="bottom"
+    android:padding="20dp"
+    >
+<ImageView
+    android:layout_width="75dp"
+    android:layout_height="75dp"
+    android:src="@mipmap/logo_round"/>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Emergency Alert!!"
+        android:textSize="24dp"
+        android:fontFamily="@font/aclonica"
+        android:textColor="@color/white"
+        />
+    <TextView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:text="Help in danger"
+    android:textSize="14dp"
+    android:fontFamily="@font/aclonica"
+    android:textColor="@color/white"
+    />
+</LinearLayout>
