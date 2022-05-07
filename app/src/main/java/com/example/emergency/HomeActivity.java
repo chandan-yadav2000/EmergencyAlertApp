@@ -43,7 +43,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     FusedLocationProviderClient fusedLocationProviderClient;
     TextView locality, longitude, latitude, address, country;
     GPSTracker gpsTracker;
-    public String A , B;
+    public String A , B, C;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -116,14 +116,15 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 for(DataSnapshot ds : snapshot.getChildren()) {
                     String uid = ds.getKey();
-                    String A = snapshot.child(uid).child("phone1").getValue(String.class);
-                    String B = snapshot.child(uid).child("phone2").getValue(String.class);
+                   A = snapshot.child(uid).child("phone1").getValue(String.class);
+                   B = snapshot.child(uid).child("phone2").getValue(String.class);
+                   C = snapshot.child(uid).child("message").getValue(String.class);
                 }
 
             }
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
-
+                Toast.makeText(HomeActivity.this, error.getMessage(), Toast.LENGTH_LONG).show();
             }
         });
     }
@@ -153,11 +154,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         } else {
             Toast.makeText(HomeActivity.this, "No Records", Toast.LENGTH_SHORT).show();
         }
-
     }
 
     public void sendSms() {
         retrieveData();
+
         String sPhone[] = {A,B};
         String message= "Help me I am danger http://maps.google.com/?q="+gpsTracker.getLatitude()+","+gpsTracker.getLongitude()+" "+"I am  here";
         SmsManager smsManager = SmsManager.getDefault();
@@ -204,6 +205,11 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
           }
         else if(i == R.id.nav_profile){
             Intent intent = new Intent(HomeActivity.this,ProfileActivity.class);
+            //intent.putExtra("sendNumber",getIntent().getStringExtra("PhoneNumber"));
+            startActivity(intent);
+        }
+        else if(i == R.id.nav_edit){
+            Intent intent = new Intent(HomeActivity.this,UpdateActivity.class);
             //intent.putExtra("sendNumber",getIntent().getStringExtra("PhoneNumber"));
             startActivity(intent);
         }
