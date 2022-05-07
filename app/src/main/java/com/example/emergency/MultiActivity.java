@@ -1,17 +1,22 @@
 package com.example.emergency;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.view.GravityCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import com.google.android.material.navigation.NavigationView;
+import com.google.firebase.auth.FirebaseAuth;
 
-public class MultiActivity extends AppCompatActivity {
+public class MultiActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     NavigationView navigationView;
     DrawerLayout drawerLayout;
+    FirebaseAuth mAuth;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -19,19 +24,62 @@ public class MultiActivity extends AppCompatActivity {
         setContentView(R.layout.activity_multi);
 
         //Hooks
-        drawerLayout = findViewById(R.id.drawerLayout);
-        navigationView = findViewById(R.id.navigation_view);
+        drawerLayout = findViewById(R.id.drawerLayout1);
+        navigationView = findViewById(R.id.navigation_view1);
 
         //Navigation View
-        findViewById(R.id.imageMenu).setOnClickListener(new View.OnClickListener() {
+        findViewById(R.id.imageMenu12).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 drawerLayout.openDrawer(GravityCompat.START);
             }
         });
         navigationView.bringToFront();
-        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+        navigationView.setNavigationItemSelectedListener(this);
 
+    }
+    public boolean onNavigationItemSelected(@NonNull MenuItem item)
+    {
+        int i = item.getItemId();
+
+        if(i == R.id.nav_home){
+            drawerLayout.closeDrawer(GravityCompat.START);
+        }
+        else if(i == R.id.nav_profile){
+            Intent intent = new Intent(MultiActivity.this,ProfileActivity.class);
+            //intent.putExtra("sendNumber",getIntent().getStringExtra("PhoneNumber"));
+            startActivity(intent);
+        }
+        else if(i == R.id.nav_edit){
+            Intent intent = new Intent(MultiActivity.this,UpdateActivity.class);
+            //intent.putExtra("sendNumber",getIntent().getStringExtra("PhoneNumber"));
+            startActivity(intent);
+        }
+        else if(i == R.id.nav_helpline){
+            Intent intent = new Intent(MultiActivity.this,MultiActivity.class);
+            //intent.putExtra("sendNumber",getIntent().getStringExtra("PhoneNumber"));
+            startActivity(intent);
+        }
+
+        else if(i == R.id.nav_feedback){
+            Intent intent = new Intent(MultiActivity.this,FeedbackActivity.class);
+            startActivity(intent);
+        }
+        else if(i == R.id.nav_Logout){
+            mAuth.signOut();
+            signOutUser();
+        }
+        return true;
+    }
+
+
+
+    //Sign Out
+    private void signOutUser() {
+
+        Intent intent = new Intent(MultiActivity.this,FirstActivity.class);
+        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
     }
 
 }

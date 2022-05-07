@@ -57,12 +57,9 @@ public class DetailActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(!ValidateField()){
-                    return;
-                }else{
-                    CheckAllNumbers();
+                if(CheckAllNumbers() && ValidateField()) {
+                    saveData();
                 }
-
             }
         });
     }
@@ -102,10 +99,7 @@ public class DetailActivity extends AppCompatActivity {
             _Num.setEnabled(true);
             return false;
         }
-        else{
-            CheckAllNumbers();
-        }
-        return false;
+        return true;
     }
 
     //Popup Message if Phone Number Matches in case......
@@ -120,7 +114,6 @@ public class DetailActivity extends AppCompatActivity {
             alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
             alertDialog.setPositiveButton("OK", null);
             alertDialog.show();
-            return false;
         }
         else if (_Phone1.getEditText().getText().toString().equals(_Phone2.getEditText().getText().toString())) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailActivity.this);
@@ -129,7 +122,7 @@ public class DetailActivity extends AppCompatActivity {
             alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
             alertDialog.setPositiveButton("OK", null);
             alertDialog.show();
-            return false;
+
         }
         else if (_Phone2.getEditText().getText().toString().equals(_Num.getEditText().getText().toString()) ) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailActivity.this);
@@ -138,7 +131,7 @@ public class DetailActivity extends AppCompatActivity {
             alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
             alertDialog.setPositiveButton("OK", null);
             alertDialog.show();
-            return false;
+
         }
         else if (_Num.getEditText().getText().toString().equals(_Phone1.getEditText().getText().toString()) ) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailActivity.this);
@@ -147,19 +140,13 @@ public class DetailActivity extends AppCompatActivity {
             alertDialog.setIcon(android.R.drawable.ic_dialog_alert);
             alertDialog.setPositiveButton("OK", null);
             alertDialog.show();
-            return false;
-        }
-        else {
 
-            saveData();
         }
         return true;
     }
 
     //Saving user data in Firebase Database.....
     private void saveData() {
-
-        if(CheckAllNumbers() && ValidateField()) {
             saveButton.setVisibility(View.GONE);
             _ProgressBar.setVisibility(View.VISIBLE);
             rootNode = FirebaseDatabase.getInstance();
@@ -204,11 +191,7 @@ public class DetailActivity extends AppCompatActivity {
                     }
             );
         }
-        else{
-            Toast.makeText(this, "Some Error has been occurred", Toast.LENGTH_SHORT).show();
-        }
-        }
-
 }
+
 
 
