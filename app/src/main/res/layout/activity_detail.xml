@@ -73,7 +73,7 @@
             android:layout_margin="10dp"
             android:textColorHint="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="Enter Number of Person">
+            android:hint="First person calling number">
             <com.google.android.material.textfield.TextInputEditText
                 android:layout_height="wrap_content"
                 android:textColor="@color/white"
@@ -90,7 +90,7 @@
             android:layout_margin="10dp"
             android:textColorHint="@color/white"
             style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-            android:hint="@string/enter_number_of_person_2">
+            android:hint="Second messaging number">
             <com.google.android.material.textfield.TextInputEditText
                 android:textColor="@color/white"
                 android:layout_height="wrap_content"

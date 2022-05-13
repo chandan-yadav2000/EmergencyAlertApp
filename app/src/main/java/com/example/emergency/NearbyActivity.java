@@ -43,7 +43,9 @@ public class NearbyActivity extends AppCompatActivity implements NavigationView.
         int i = item.getItemId();
 
         if(i == R.id.nav_home){
-            drawerLayout.closeDrawer(GravityCompat.START);
+            Intent intent = new Intent(NearbyActivity.this,HomeActivity.class);
+            //intent.putExtra("sendNumber",getIntent().getStringExtra("PhoneNumber"));
+            startActivity(intent);
         }
         else if(i == R.id.nav_profile){
             Intent intent = new Intent(NearbyActivity.this,ProfileActivity.class);
@@ -59,6 +61,9 @@ public class NearbyActivity extends AppCompatActivity implements NavigationView.
             Intent intent = new Intent(NearbyActivity.this,MultiActivity.class);
             //intent.putExtra("sendNumber",getIntent().getStringExtra("PhoneNumber"));
             startActivity(intent);
+        }
+        else if(i == R.id.nav_nearby){
+            drawerLayout.closeDrawer(GravityCompat.START);
         }
         else if(i == R.id.nav_feedback){
             Intent intent = new Intent(NearbyActivity.this,FeedbackActivity.class);
