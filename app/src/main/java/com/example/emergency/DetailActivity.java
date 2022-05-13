@@ -105,8 +105,8 @@ public class DetailActivity extends AppCompatActivity {
     //Popup Message if Phone Number Matches in case......
     private boolean CheckAllNumbers(){
 
-        if (_Phone1.getEditText().getText().toString().equals(_Phone2.getEditText().getText().toString()) ||
-                _Phone2.getEditText().getText().toString().equals(_Num.getEditText().getText().toString()) ||
+        if (_Phone1.getEditText().getText().toString().equals(_Phone2.getEditText().getText().toString()) &&
+                _Phone2.getEditText().getText().toString().equals(_Num.getEditText().getText().toString()) &&
                 _Num.getEditText().getText().toString().equals(_Phone1.getEditText().getText().toString())) {
             AlertDialog.Builder alertDialog = new AlertDialog.Builder(DetailActivity.this);
             alertDialog.setTitle("Info");
@@ -153,8 +153,8 @@ public class DetailActivity extends AppCompatActivity {
             reference = rootNode.getReference().child("Users");
 
             String fullName = _FullName.getEditText().getText().toString();
-            String phone1 = _Phone1.getEditText().getText().toString();
-            String phone2 = _Phone2.getEditText().getText().toString();
+            String phone1 = "+91"+ _Phone1.getEditText().getText().toString();
+            String phone2 = "+91"+_Phone2.getEditText().getText().toString();
             String message = _Message.getEditText().getText().toString();
             String number = _Num.getEditText().getText().toString();
 
@@ -162,7 +162,7 @@ public class DetailActivity extends AppCompatActivity {
 
 
             UserHelperClass helperClass = new UserHelperClass(fullName, phone1, phone2, message, number);
-            reference.push().setValue(helperClass);
+            reference.child(number).setValue(helperClass);
 
             //Otp Activity
             PhoneAuthProvider.getInstance().verifyPhoneNumber(

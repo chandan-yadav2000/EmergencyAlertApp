@@ -10,6 +10,7 @@ import androidx.drawerlayout.widget.DrawerLayout;
 
 
 import android.Manifest;
+import android.app.PendingIntent;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
@@ -32,6 +33,8 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+import java.util.Arrays;
+
 
 public class HomeActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     private static final int REQUEST_CALL = 1;
@@ -44,7 +47,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     TextView locality, longitude, latitude, address, country;
     GPSTracker gpsTracker;
     public String A , B, C;
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -88,7 +90,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
                 }
 
                 getLocationPStatus();
-
                 makePhoneCall();
 
             }
@@ -157,14 +158,18 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     public void sendSms() {
-        retrieveData();
-
-        String sPhone[] = {A,B};
-        String message= "Help me I am danger http://maps.google.com/?q="+gpsTracker.getLatitude()+","+gpsTracker.getLongitude()+" "+"I am  here";
-        SmsManager smsManager = SmsManager.getDefault();
-        for(String mess : sPhone)
-        smsManager.sendTextMessage(mess,null,message,null,null);
-        Toast.makeText(HomeActivity.this, "Message send successfully", Toast.LENGTH_SHORT).show();
+        try {
+            String[] sPhone = {A,B};
+            String dataMessage = C;
+            String message = dataMessage + "http://maps.google.com/maps?saddr=" + gpsTracker.getLatitude() + "," + gpsTracker.getLongitude() + " " + "I am  here";
+            SmsManager smsManager = SmsManager.getDefault();
+            for (String mess : sPhone)
+                smsManager.sendTextMessage(mess, null, message, null, null);
+            Toast.makeText(HomeActivity.this, "Message send successfully", Toast.LENGTH_SHORT).show();
+        }
+        catch (Exception ex){
+            Toast.makeText(HomeActivity.this, ex.getMessage(), Toast.LENGTH_SHORT).show();
+        }
         }
 
     private boolean getLocationPStatus() {
@@ -232,8 +237,6 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
         }
         return true;
     }
-
-
 
     //Sign Out
     private void signOutUser() {
