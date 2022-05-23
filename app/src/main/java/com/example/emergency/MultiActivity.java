@@ -27,7 +27,8 @@ public class MultiActivity extends AppCompatActivity implements NavigationView.O
     NavigationView navigationView;
     DrawerLayout drawerLayout;
     FirebaseAuth mAuth;
-    CardView police;
+    CardView police,fireFighter,ambulance,womenHelpline,roadAccident,railwayEnquiry,
+    seniorCitizen,farmer,childLabour,LPG,cyberSecurity,animalSafety;
     Context context;
     private static final int REQUEST_CALL = 1;
     private static final String CALL_PRIVILEGED = "android.permission.CALL_PRIVILEGED";
@@ -42,7 +43,18 @@ public class MultiActivity extends AppCompatActivity implements NavigationView.O
         drawerLayout = findViewById(R.id.drawerLayout1);
         navigationView = findViewById(R.id.navigation_view1);
         police = findViewById(R.id.policeClick);
-        helpline helpline1 = new helpline();
+        fireFighter = findViewById(R.id.fireClick);
+        ambulance = findViewById(R.id.ambulanceClick);
+        womenHelpline = findViewById(R.id.womenClick);
+        roadAccident = findViewById(R.id.roadAccidentClick);
+        railwayEnquiry = findViewById(R.id.railwayClick);
+        seniorCitizen = findViewById(R.id.seniorClick);
+        farmer = findViewById(R.id.farmerClick);
+        childLabour = findViewById(R.id.childLabourClick);
+        LPG = findViewById(R.id.lpgGas);
+        cyberSecurity = findViewById(R.id.cyberClick);
+        animalSafety = findViewById(R.id.animalClick);
+        helpline helpline1 = new helpline(MultiActivity.this);
 
 
         //Navigation View
@@ -58,24 +70,87 @@ public class MultiActivity extends AppCompatActivity implements NavigationView.O
         police.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String Call = "100";
-                if (Call.trim().length() > 0) {
-                    if (ContextCompat.checkSelfPermission(MultiActivity.this,
-                            Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {
-                        ActivityCompat.requestPermissions(MultiActivity.this,
-                                new String[]{Manifest.permission.CALL_PHONE}, 1);
-                    } else {
-                        String dial = "tel:"+ "100";
-                        Intent callIntent = new Intent(Intent.ACTION_CALL);
-                        callIntent.setData(Uri.parse(dial));
-                        callIntent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK|Intent.FLAG_ACTIVITY_NO_USER_ACTION);
-                        startActivity(callIntent);
-                    }
-                } else {
-                    Toast.makeText(MultiActivity.this, "No Records", Toast.LENGTH_SHORT).show();
-                }
+                helpline1.policeCall();
             }
         });
+
+        fireFighter.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.FireFighter();
+            }
+        });
+
+        ambulance.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.Ambulance();
+            }
+        });
+
+        womenHelpline.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.WomenHelpline();
+            }
+        });
+
+        roadAccident.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.roadAccident();
+            }
+        });
+
+        railwayEnquiry.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.railwayHelpline();
+            }
+        });
+
+        seniorCitizen.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.seniorCitizen();
+            }
+        });
+
+        farmer.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.farmer();
+            }
+        });
+
+        childLabour.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.childLabour();
+            }
+        });
+
+        LPG.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.LpgGasSystem();
+            }
+        });
+
+        cyberSecurity.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.cyberSecurity();
+            }
+        });
+
+        animalSafety.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                helpline1.animalSafetyCall();
+            }
+        });
+
 
     }
 
@@ -118,9 +193,7 @@ public class MultiActivity extends AppCompatActivity implements NavigationView.O
         }
         return true;
     }
-
-
-
+    
     //Sign Out
     private void signOutUser() {
 
