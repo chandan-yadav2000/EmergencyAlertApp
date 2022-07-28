@@ -142,7 +142,7 @@ public class HomeActivity extends AppCompatActivity implements NavigationView.On
     }
 
     private void makePhoneCall() {
-        String Call = A;
+        String Call = "+91" + A;
         if (Call.trim().length() > 0) {
             if (ContextCompat.checkSelfPermission(HomeActivity.this,
                     Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED) {

@@ -153,8 +153,8 @@ public class DetailActivity extends AppCompatActivity {
             reference = rootNode.getReference().child("Users");
 
             String fullName = _FullName.getEditText().getText().toString();
-            String phone1 = "+91"+ _Phone1.getEditText().getText().toString();
-            String phone2 = "+91"+_Phone2.getEditText().getText().toString();
+            String phone1 = _Phone1.getEditText().getText().toString();
+            String phone2 = _Phone2.getEditText().getText().toString();
             String message = _Message.getEditText().getText().toString();
             String number = _Num.getEditText().getText().toString();
 
